@@ -24,6 +24,9 @@ pico_add_extra_outputs(main)
 
 target_link_libraries(main
 	pico_stdlib
+    pico_multicore 
+    hardware_irq 
+    hardware_i2c
 	# other libs as needed
 )
 

@@ -81,3 +81,17 @@ make flash
 
 
 
+# MPU-6050 6 DoF IMU Example 
+
+This is an attempt to break out the [SDK demo](https://github.com/raspberrypi/pico-examples/tree/master/i2c/mpu6050_i2c) from it's captive build tree and do a generalized demo of it.
+
+
+
+## References
+
+[Amazon](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+[RP2040 SDK example code](https://github.com/raspberrypi/pico-examples/tree/master/i2c/mpu6050_i2c)
+[Hunter Adams class demo](https://github.com/vha3/Hunter-Adams-RP2040-Demos/tree/master/Sensors/MPU6050_IMU_Demo)
+[Datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+
+
