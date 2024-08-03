@@ -38,7 +38,7 @@ build
 **/install_manifest.txt
 **/CMakeFiles/
 **/CTestTestfile.cmake
-**/Makefile
+#**/Makefile - we want the one in the top folder!
 **/*.cbp
 **/CMakeScripts
 **/compile_commands.json

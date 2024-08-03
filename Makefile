@@ -5,7 +5,7 @@ ELF = build/main.elf
 dummy:
 	@echo "Please specify a target to build"
 
-build: 
+build: clean
 	@echo "Building the project"
 	cd build;cmake ..;make -j8
 
