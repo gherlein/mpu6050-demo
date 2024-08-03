@@ -14,7 +14,7 @@ add_executable(main
 )
 
 pico_enable_stdio_usb(main 1)
-pico_enable_stdio_uart(main 1)
+pico_enable_stdio_uart(main 0)
 
 target_include_directories(main PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
