@@ -9,8 +9,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-include_directories(pico_i2c_common)
-add_subdirectory(pico_i2c_common)
+include_directories(pico-i2c-common)
+add_subdirectory(pico-i2c-common)
 
 add_executable(main
         main.c
@@ -21,7 +21,7 @@ target_link_libraries(main
     pico_multicore 
     hardware_irq 
     hardware_i2c
-    pico_i2c_common
+    pico-i2c-common
 )
 
 

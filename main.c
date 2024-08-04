@@ -6,7 +6,7 @@
 
 #include "hardware/gpio.h"
 #include "hardware/i2c.h"
-#include "pico_i2c_common.h"
+#include "pico-i2c-common.h"
 #include "pico/binary_info.h"
 #include "pico/stdlib.h"
 #include "pico/time.h"
