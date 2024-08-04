@@ -55,16 +55,16 @@ static void mpu6050_reset(i2c_inst_t *i2c) {
   printf("rval: %d\n", rval);
   // from Hunter Adam's code:
   // Set gyro sample rate (set to 1KHz, same as accel)
-  // uint8_t gyro_rate[] = {0x19, 0b00000111} ;
-  // i2c_write_blocking(i2c, addr, gyro_rate, 2, false);
+  uint8_t gyro_rate[] = {0x19, 0b00000111};
+  i2c_write_blocking(i2c, addr, gyro_rate, 2, false);
 
   // Configure the Gyro range (+/- 250 deg/s)
-  // uint8_t gyro_settings[] = {0x1b, 0b00000000} ;
-  // i2c_write_blocking(i2c, addr, gyro_settings, 2, false);
+  uint8_t gyro_settings[] = {0x1b, 0b00000000};
+  i2c_write_blocking(i2c, addr, gyro_settings, 2, false);
 
   // Configure the Accel range (+/- 2g's)
-  // uint8_t accel_settings[] = {0x1c, 0b00000000} ;
-  // i2c_write_blocking(i2c, addr, accel_settings, 2, false);
+  uint8_t accel_settings[] = {0x1c, 0b00000000};
+  i2c_write_blocking(i2c, addr, accel_settings, 2, false);
 
 #if 0
     // Configure interrupt pin
@@ -180,8 +180,6 @@ static void mpu6050_read_raw_sdk(i2c_inst_t *i2c, int16_t accel[3],
   // puts("Hello World\n");
 }
 
-#define NORMAL
-#ifdef NORMAL
 int main() {
   i2c_inst_t *i2c = i2c0;
   const uint sda_pin = 8;
@@ -198,8 +196,6 @@ int main() {
          sda_pin, scl_pin);
   sleep_ms(2000);
 
-#define RUN_COLLECTION
-#ifdef RUN_COLLECTION
   i2c_init(i2c, 400 * 1000);
   gpio_set_function(sda_pin, GPIO_FUNC_I2C);
   gpio_set_function(scl_pin, GPIO_FUNC_I2C);
@@ -211,7 +207,7 @@ int main() {
   // mpu6050_reset(i2c);
 
   //    while (1) {
-        scan_i2c(i2c);
+  scan_i2c(i2c);
   //        sleep_ms(5000);
   //    }
 
@@ -221,24 +217,18 @@ int main() {
     mpu6050_read_raw(i2c, acceleration, gyro, &temp);
 
     absolute_time_t timestamp = get_absolute_time();
-    printf("Time: %lld\n", timestamp);
+    printf("T %lld ", timestamp);
 
     // These are the raw numbers from the chip, so will need tweaking to be
     // really useful. See the datasheet for more information
-    printf("Acc. X = %d, Y = %d, Z = %d\n", acceleration[0], acceleration[1],
-           acceleration[2]);
-    printf("Gyro. X = %d, Y = %d, Z = %d\n", gyro[0], gyro[1], gyro[2]);
+    printf("A %d %d %d ", acceleration[0], acceleration[1], acceleration[2]);
+    printf("G %d %d %d ", gyro[0], gyro[1], gyro[2]);
     // Temperature is simple so use the datasheet calculation to get deg C.
     // Note this is chip temperature.
-    printf("Temp. = %f\n", (temp / 340.0) + 36.53);
-    printf("*******************************************************************"
-           "*************************\n");
-
+    printf("T %f\n", (temp / 340.0) + 36.53);
     memset(acceleration, 0, BUF_LEN);
     memset(gyro, 0, BUF_LEN);
     temp = 0;
     sleep_ms(1000);
   }
-#endif
 }
-#endif
