@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Pull in SDK (must be before project)
 include(pico_sdk_import.cmake)
 
 project(main C CXX ASM)
@@ -9,28 +9,20 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_executable(main    
-    main.c
+include_directories(pico_i2c_common)
+add_subdirectory(pico_i2c_common)
+
+add_executable(main
+        main.c
 )
 
-pico_enable_stdio_usb(main 1)
-pico_enable_stdio_uart(main 0)
-
-target_include_directories(main PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
-)
-
-pico_add_extra_outputs(main)
-
-target_link_libraries(main
-	pico_stdlib
+target_link_libraries(main 
+    pico_stdlib
     pico_multicore 
     hardware_irq 
     hardware_i2c
-	# other libs as needed
+    pico_i2c_common
 )
 
-add_custom_target(flash
-    COMMAND /bin/bash ../flash
-    DEPENDS main
-)
+
+pico_add_extra_outputs(main)
